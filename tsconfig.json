@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
+    "lib": ["es5", "es6"],
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es5", "dom"],
     "outDir": "./dist",
     "rootDir": "./src",
     "declaration": true,
@@ -11,10 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "include": [
-    "./src/**/*.ts"
-  ],
+  "include": ["./src/**/*.ts"]
 }
-  
