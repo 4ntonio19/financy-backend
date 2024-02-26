@@ -20,7 +20,7 @@
    },
    "scripts": {
       "build": "tsc",
-      "dev": "ts-node-dev src/server.ts",
+      "dev": "ts-node-dev src/app.ts",
       "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
    }
 }

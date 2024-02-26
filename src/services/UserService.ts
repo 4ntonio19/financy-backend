@@ -25,4 +25,16 @@ export class UserService {
     user.createdAt = new Date();
     return await userRepository.save(user);
   }
+
+  async updateUser(user: IUser, id: number) {
+    const userDb = await userRepository.update(id, user);
+    if (!userDb) {
+      throw new Error();
+    }
+    return userDb;
+  }
+
+  async deleteUser(id: number): Promise<void> {
+    await userRepository.delete(id);
+  }
 }

@@ -8,5 +8,11 @@ usersRouter.get("/usuarios/:id", (req, res) =>
   userController.findById(req, res)
 );
 usersRouter.post("/usuarios", (req, res) => userController.createOne(req, res));
+usersRouter.put("/usuarios/:id", (req, res) =>
+  userController.updateOne(req, res)
+);
+usersRouter.delete("/usuarios/:id", (req, res) =>
+  userController.removeOne(req, res)
+);
 
 export default usersRouter;
