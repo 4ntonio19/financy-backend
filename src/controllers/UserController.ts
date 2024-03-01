@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IUser } from "../types/User";
 import { UserService } from "../services/UserService";
+import IUser from "../types/User";
 
 class UserController {
   constructor() {}

@@ -1,23 +1,24 @@
-import { IUser } from "../types/User";
-import User from "../entities/User";
+import User from "../models/User";
+import IUser from "../types/User";
 import { AppDataSource } from "../database/data-source";
 const userRepository = AppDataSource.getRepository(User);
 export class UserService {
   constructor() {}
 
   async getUsers(): Promise<IUser[]> {
-    const listUsers = await userRepository.find();
-    if (!listUsers) {
-      throw new Error();
-    }
+    const listUsers = await userRepository.find({
+      relations: { categories: true, transactions: true },
+    });
+    if (!listUsers) throw new Error();
     return listUsers;
   }
 
   async getUserById(id: number): Promise<IUser> {
-    const userDb = await userRepository.findOne({ where: { id } });
-    if (!userDb) {
-      throw new Error();
-    }
+    const userDb = await userRepository.findOne({
+      where: { id },
+      relations: { categories: true, transactions: true },
+    });
+    if (!userDb) throw new Error();
     return userDb;
   }
 
@@ -28,9 +29,7 @@ export class UserService {
 
   async updateUser(user: IUser, id: number) {
     const userDb = await userRepository.update(id, user);
-    if (!userDb) {
-      throw new Error();
-    }
+    if (!userDb) throw new Error();
     return userDb;
   }
 
