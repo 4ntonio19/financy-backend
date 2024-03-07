@@ -2,11 +2,21 @@ import { AppDataSource } from "../database/data-source";
 import Transaction from "../models/Transaction";
 import ITransaction from "../types/Transaction";
 
-const transactionRepository = AppDataSource.getRepository(Transaction);
+const repository = AppDataSource.getRepository(Transaction);
 class TransactionService {
   async getTransactions(): Promise<ITransaction[]> {
-    const listTransactions = transactionRepository.find({
-      relations: { user_id: true, categories_id: true },
+    const listTransactions = repository.find();
+    if (!listTransactions) throw new Error();
+    return listTransactions;
+  }
+
+  async getTransactionsByUserId(id: number) {
+    const listTransactions = repository.find({
+      where: {
+        user_id: {
+          id: id,
+        },
+      },
     });
     if (!listTransactions) throw new Error();
     return listTransactions;
@@ -15,7 +25,7 @@ class TransactionService {
   async postTransaction(transaction: ITransaction): Promise<ITransaction> {
     if (!transaction.user_id || !transaction.categories_id) throw new Error();
     transaction.createdAt = new Date();
-    return await transactionRepository.save(transaction);
+    return await repository.save(transaction);
   }
 }
 

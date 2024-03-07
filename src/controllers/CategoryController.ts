@@ -19,6 +19,23 @@ class CategoryController {
       }
     }
   }
+  async findByUserId(req: Request, res: Response) {
+    const service = new CategoryService();
+    try {
+      const { id } = req.params;
+      const list: ICategory[] = await service.getCategoriesByUserId(Number(id));
+      return res.status(200).json(list);
+    } catch (error: any) {
+      console.log(error);
+      if (error.status === 404) {
+        res
+          .status(404)
+          .json({ erro: "Não possuem dados para serem exibidos!" });
+      } else {
+        res.status(500).json({ erro: "Hove um erro no servidor." });
+      }
+    }
+  }
 
   async createOne(req: Request, res: Response) {
     const service = new CategoryService();

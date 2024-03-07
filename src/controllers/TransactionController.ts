@@ -20,6 +20,25 @@ class TransactionController {
     }
   }
 
+  async findByUserId(req: Request, res: Response) {
+    const service = new TransactionService();
+    try {
+      const { id } = req.params;
+      const listTransactions: ITransaction[] =
+        await service.getTransactionsByUserId(Number(id));
+      res.status(200).json(listTransactions);
+    } catch (error: any) {
+      console.log(error);
+      if (error.status === 404) {
+        res
+          .status(404)
+          .json({ erro: "Não possuem dados para serem exibidos!" });
+      } else {
+        res.status(500).json({ erro: "Hove um erro no servidor." });
+      }
+    }
+  }
+
   async createOne(req: Request, res: Response) {
     const service = new TransactionService();
     try {

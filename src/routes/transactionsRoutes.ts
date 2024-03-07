@@ -7,6 +7,9 @@ const transactionController = new TransactionController();
 transactionRouter.get("/transactions", (req, res) =>
   transactionController.findAll(req, res)
 );
+transactionRouter.get("/:id/transactions", (req, res) =>
+  transactionController.findByUserId(req, res)
+);
 transactionRouter.post("/transactions", (req, res) =>
   transactionController.createOne(req, res)
 );

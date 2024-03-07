@@ -7,6 +7,9 @@ const categoryController = new CategoryController();
 categoriesRouter.get("/categories", (req, res) =>
   categoryController.findAll(req, res)
 );
+categoriesRouter.get("/:id/categories", (req, res) =>
+  categoryController.findByUserId(req, res)
+);
 
 categoriesRouter.post("/categories", (req, res) =>
   categoryController.createOne(req, res)

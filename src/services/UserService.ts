@@ -1,39 +1,52 @@
 import User from "../models/User";
 import IUser from "../types/User";
 import { AppDataSource } from "../database/data-source";
-const userRepository = AppDataSource.getRepository(User);
+const repository = AppDataSource.getRepository(User);
 export class UserService {
   constructor() {}
 
   async getUsers(): Promise<IUser[]> {
-    const listUsers = await userRepository.find({
+    const listUsers = await repository.find({
       relations: { categories: true, transactions: true },
     });
     if (!listUsers) throw new Error();
-    return listUsers;
+    const usersWithoutPass = listUsers.map((user) => ({
+      ...user,
+      password: undefined,
+    }));
+    return usersWithoutPass;
   }
 
   async getUserById(id: number): Promise<IUser> {
-    const userDb = await userRepository.findOne({
+    const userDb = await repository.findOne({
       where: { id },
       relations: { categories: true, transactions: true },
     });
     if (!userDb) throw new Error();
-    return userDb;
+    const userWithoutPass = {
+      ...userDb,
+      password: undefined,
+    };
+    return userWithoutPass;
   }
 
   async postUser(user: IUser): Promise<IUser> {
     user.createdAt = new Date();
-    return await userRepository.save(user);
+    const userCreated = await repository.save(user);
+    const userWithoutPass = {
+      ...userCreated,
+      password: undefined,
+    };
+    return userWithoutPass;
   }
 
   async updateUser(user: IUser, id: number) {
-    const userDb = await userRepository.update(id, user);
+    const userDb = await repository.update(id, user);
     if (!userDb) throw new Error();
     return userDb;
   }
 
   async deleteUser(id: number): Promise<void> {
-    await userRepository.delete(id);
+    await repository.delete(id);
   }
 }
