@@ -7,7 +7,7 @@ import Transaction from "../models/Transaction";
 export const AppDataSource = new DataSource({
   type: "mysql",
   host: process.env.DATABASE_HOST,
-  port: 3306,
+  port: Number(process.env.DATABASE_PORT),
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PWD,
   database: process.env.DATABASE_NAME,
