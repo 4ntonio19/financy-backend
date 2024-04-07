@@ -20,7 +20,6 @@ export default class SessionService {
     const sessionObject = {
       id: findUser.id,
       name: findUser.fullName,
-      email: findUser.email,
       token: this.createToken(email),
     };
     return sessionObject;
