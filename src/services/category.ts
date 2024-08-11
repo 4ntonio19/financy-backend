@@ -96,4 +96,45 @@ export default class CategoryService {
 
     return categoryCreated.id
   }
+
+  async putOne(id: string, dto: CategoryPostModel): Promise<string> {
+    const editCategory = await repository.category.update({
+      where: {
+        id,
+        user_id: dto.user_id
+      },
+      data: {
+        title: dto.title,
+        icon: dto.icon,
+        color: dto.color,
+        type: dto.type
+      }
+    })
+
+    return editCategory.id
+  }
+
+  async deleteOne(id: string, user_id: string): Promise<void> {
+    const categoryExist = await repository.category.findUnique({
+      where: {
+        id,
+        user_id,
+      },
+      select: {
+        transactions: true,
+      },
+    })
+
+    if (
+      categoryExist?.transactions.length &&
+      categoryExist?.transactions.length > 0
+    )
+      throw new HandleError(400, "Essa categoria possui transações.")
+    await repository.category.delete({
+      where: {
+        id,
+        user_id,
+      },
+    })
+  }
 }

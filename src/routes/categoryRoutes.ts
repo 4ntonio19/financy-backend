@@ -12,4 +12,12 @@ categoryRouter.post('/categories', (req: Request, res: Response) => {
     controller.create(req, res)
 })
 
-export default categoryRouter
+categoryRouter.delete('/categories', (req: Request, res: Response) => {
+    controller.delete(req, res)
+})
+
+categoryRouter.put("/categories/:id", (req: Request, res: Response) => {
+    controller.edit(req, res)
+})
+
+export default categoryRouter   
