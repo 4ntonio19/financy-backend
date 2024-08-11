@@ -8,4 +8,8 @@ categoryRouter.get('/categories/:userId', (req:Request, res: Response) => {
     controller.list(req, res)
 })
 
+categoryRouter.post('/categories', (req: Request, res: Response) => {
+    controller.create(req, res)
+})
+
 export default categoryRouter
