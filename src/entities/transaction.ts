@@ -1,4 +1,4 @@
-export interface Transaction {
+export interface TransactionModel {
     id: string
     title: string
     date: Date

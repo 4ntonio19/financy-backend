@@ -1,5 +1,3 @@
-import { Transaction } from "./transaction"
-
 export interface CategoryModel {
     id: string
     title: string
