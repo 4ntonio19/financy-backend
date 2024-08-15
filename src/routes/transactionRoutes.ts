@@ -9,4 +9,16 @@ transactionRouter.get('/transactions', (req: Request, res: Response) => {
     controller.list(req, res)
 })
 
+transactionRouter.get('/transactions/:id', (req: Request, res: Response) => {
+    controller.listOne(req, res)
+})
+
+transactionRouter.post('/transactions', (req: Request, res: Response) => {
+    controller.create(req, res)
+})
+
+transactionRouter.delete('/transactions/:id', (req: Request, res: Response) => {
+    controller.delete(req, res)
+})
+
 export default transactionRouter

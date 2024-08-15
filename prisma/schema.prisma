@@ -21,17 +21,17 @@ model User {
 }
 
 model Transaction {
-  id          String   @id @default(uuid())
-  title       String
-  date        DateTime
-  value       Float
-  category    Category @relation(fields: [category_id], references: [id])
-  category_id String
-  user_father User     @relation(fields: [user_id], references: [id])
-  user_id     String
-  type        Boolean
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now())
+  id             String   @id @default(uuid())
+  title          String
+  date           DateTime
+  value          Float
+  category       Category @relation(fields: [category_id], references: [id])
+  category_id    String
+  user_father    User     @relation(fields: [user_id], references: [id])
+  user_id        String
+  type           Boolean
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now())
 
   @@map("transactions")
 }

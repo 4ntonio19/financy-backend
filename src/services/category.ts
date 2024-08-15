@@ -129,7 +129,7 @@ export default class CategoryService {
       categoryExist?.transactions.length &&
       categoryExist?.transactions.length > 0
     )
-      throw new HandleError(400, "Essa categoria possui transações.")
+    throw new HandleError(400, "Essa categoria possui transações.")
     await repository.category.delete({
       where: {
         id,
