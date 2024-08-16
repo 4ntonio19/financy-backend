@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import CategoryController from "../controllers/category";
+import CategoryController from "../controllers/categoryController";
 
 const categoryRouter = Router()
 const controller = new CategoryController()
@@ -20,4 +20,4 @@ categoryRouter.put("/categories/:id", (req: Request, res: Response) => {
     controller.edit(req, res)
 })
 
-export default categoryRouter   
+export default categoryRouter

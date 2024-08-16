@@ -1,14 +1,27 @@
-export interface CategoryModel {
+import { TransactionModel } from "./transaction"
+
+export type Category = {
     id: string
     title: string
     color: string
     icon: string
-    totalValue?: number
-    percentage?: string
+    transactions: {
+        value: number
+    }[]
     type: boolean
 }
 
-export type CategoryPostModel = {
+export type CategoryResponse = {
+    id: string
+    title: string
+    color: string
+    icon: string
+    type: boolean
+    totalValue: number
+    percentage: string
+}
+
+export type CategoryRequestBody = {
     title: string
     color: string
     icon: string
