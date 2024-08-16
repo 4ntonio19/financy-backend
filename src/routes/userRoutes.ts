@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express"
-import UserController from "../controllers/user"
+import UserController from "../controllers/UserController"
 
 const userRouter = Router()
 const controller = new UserController()

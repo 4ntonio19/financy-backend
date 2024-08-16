@@ -1,5 +1,5 @@
 import { DeleteCategoryModel } from "../../models/CategoryModels";
-import { CategoryRepository } from "../../repositories/CategoriesRepository";
+import { CategoryRepository } from "../../repositories/CategoryRepository";
 import { HandleError } from "../../utils/handleError";
 const repository = new CategoryRepository()
 export class DeleteCategoryService implements DeleteCategoryModel {

@@ -1,6 +1,6 @@
 import { CategoryResponse } from "../../entities/category"
 import { ListCategoriesModel } from "../../models/CategoryModels"
-import { CategoryRepository } from "../../repositories/CategoriesRepository"
+import { CategoryRepository } from "../../repositories/CategoryRepository"
 import { HandleError } from "../../utils/handleError"
 const repository = new CategoryRepository()
 export class ListCategoriesService implements ListCategoriesModel {
