@@ -13,22 +13,24 @@ export class UserRepository {
     return data
   }
 
-  async getOneByEmail(email: string): Promise<User> {
-    const data = await prisma.user.findUniqueOrThrow({
+  async getOneByEmail(email: string): Promise<User | null> {
+    const data = await prisma.user.findUnique({
       where: {
         email,
       },
     })
+
+    if(!data) return null
     return data
   }
 
-  async getOneById(id: string): Promise<User> {
-    const data = await prisma.user.findUniqueOrThrow({
+  async getOneById(id: string): Promise<User | null> {
+    const data = await prisma.user.findUnique({
       where: {
         id,
       },
     })
-
+    if(!data) return null
     return data
   }
 }

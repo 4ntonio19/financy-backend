@@ -11,6 +11,8 @@ export class UserController {
       const userId: string = await service.create(dto)
       res.status(201).json({ id: userId })
     } catch (error: any) {
+      console.log(error);
+      
       if (error instanceof HandleError) {
         res.status(error.statusCode).json({ message: error.message })
       } else {

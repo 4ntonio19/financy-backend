@@ -1,4 +1,4 @@
-export interface TransactionModel {
+export type Transaction = {
     id: string
     title: string
     date: Date
@@ -13,7 +13,7 @@ export interface TransactionModel {
     updated_at?: Date
 }
 
-export interface PostTransactionModel {
+export type TransactionRequestBody = {
     title: string
     date: Date
     value: number

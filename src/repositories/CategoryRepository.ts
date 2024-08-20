@@ -18,8 +18,8 @@ export class CategoryRepository {
     return data
   }
 
-  public async getOne(id: string, user_id: string): Promise<Category> {
-    const data = await prisma.category.findUniqueOrThrow({
+  public async getOne(id: string, user_id: string): Promise<Category | null> {
+    const data = await prisma.category.findUnique({
       where: {
         id,
         user_id,
@@ -28,7 +28,7 @@ export class CategoryRepository {
         transactions: true
       }
     })
-
+    if(!data) return null
     return data
   }
 

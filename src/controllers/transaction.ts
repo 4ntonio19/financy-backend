@@ -1,17 +1,19 @@
 import { Request, Response } from "express"
 import { HandleError } from "../utils/handleError"
-import { TransactionService } from "../services/transaction"
-import { log } from "util"
+import { ListTransactionListService } from "../services/transactions/ListTransactionsService"
+import { ListTransactionService } from "../services/transactions/ListTransactionService"
+import { CreateTransactionService } from "../services/transactions/CreateTransactionService"
+import { DeleteTransactionService } from "../services/transactions/DeleteTransactionService"
 
-const service = new TransactionService()
 export class TransactionController {
   async list(req: Request, res: Response) {
+    const service = new ListTransactionListService()
     try {
       const { userId } = req.params
       const { startDate, endDate } = req.query
       if (!startDate || !endDate)
         throw new HandleError(400, "O período não foi informado.")
-      const transactions = await service.getAll(
+      const transactions = await service.findMany(
         userId,
         new Date(startDate?.toString()),
         new Date(endDate.toString())
@@ -29,12 +31,13 @@ export class TransactionController {
   }
 
   async listOne(req: Request, res: Response) {
+    const service = new ListTransactionService()
     try {
       const { id } = req.params
       const { user_id } = req.query
       if (!id || !user_id)
         throw new HandleError(403, "O id da transação não informado.")
-      const transaction = await service.getOneById(
+      const transaction = await service.findOne(
         id?.toString(),
         user_id?.toString()
       )
@@ -52,9 +55,10 @@ export class TransactionController {
   }
 
   async create(req: Request, res: Response) {
+    const service = new CreateTransactionService()
     try {
       const userToPost = req.body
-      const transaction_id = await service.postOne(userToPost)
+      const transaction_id = await service.create(userToPost)
       res.status(201).json({ id: transaction_id })
     } catch (error) {
       console.log(error)
@@ -64,12 +68,13 @@ export class TransactionController {
   }
 
   async delete(req: Request, res: Response) {
+    const service = new DeleteTransactionService()
     try {
       const { id } = req.params
       const { user_id } = req.query
       if (!id || !user_id)
         throw new HandleError(403, "O id da transação não informado.")
-      await service.deleteOne(id, user_id.toString())
+      await service.delete(id, user_id.toString())
       res.status(200).json(null)
     } catch (error) {
       console.log(error)

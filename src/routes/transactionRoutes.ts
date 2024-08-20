@@ -5,11 +5,11 @@ const transactionRouter = Router()
 
 const controller = new TransactionController()
 
-transactionRouter.get('/transactions', (req: Request, res: Response) => {
+transactionRouter.get('/transactions/:user_Id', (req: Request, res: Response) => {
     controller.list(req, res)
 })
 
-transactionRouter.get('/transactions/:id', (req: Request, res: Response) => {
+transactionRouter.get('/transaction/:id', (req: Request, res: Response) => {
     controller.listOne(req, res)
 })
 

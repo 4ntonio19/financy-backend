@@ -1,4 +1,4 @@
-import { TransactionModel } from "./transaction"
+import { Transaction } from "./transaction"
 
 export type Category = {
     id: string
