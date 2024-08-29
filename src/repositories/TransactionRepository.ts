@@ -25,6 +25,7 @@ export class TransactionRepository {
           select: {
             color: true,
             id: true,
+            title: true,
           },
         },
       },
