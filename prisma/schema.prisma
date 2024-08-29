@@ -9,26 +9,31 @@ datasource db {
 
 model User {
   id           String        @id @default(uuid())
+  name         String
   email        String        @unique
   transactions Transaction[]
   categories   Category[]
 
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@map("users")
 }
 
 model Transaction {
-  id          String   @id @default(uuid())
-  title       String
-  date        DateTime
-  value       Float
-  category    Category @relation(fields: [category_id], references: [id])
-  category_id String
-  user_father User     @relation(fields: [user_id], references: [id])
-  user_id     String
+  id             String   @id @default(uuid())
+  title          String
+  date           DateTime
+  value          Float
+  category       Category @relation(fields: [category_id], references: [id])
+  category_id    String
+  user_father    User     @relation(fields: [user_id], references: [id])
+  user_id        String
+  type           Boolean
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now())
 
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  @@map("transactions")
 }
 
 model Category {
@@ -36,10 +41,13 @@ model Category {
   title        String
   color        String
   icon         String
+  type         Boolean
   transactions Transaction[]
   user_father  User          @relation(fields: [user_id], references: [id])
   user_id      String
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+
+  @@map("categories")
 }
